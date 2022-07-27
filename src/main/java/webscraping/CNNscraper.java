@@ -6,6 +6,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.text.StringEscapeUtils;
 
 public class CNNscraper {
 
@@ -48,7 +49,7 @@ public class CNNscraper {
         String current = input.substring(ul);
         ArrayList<String> articles = new ArrayList<>();
         while (!current.isEmpty()) {
-            articles.add(extractHeadline(current));
+            articles.add(StringEscapeUtils.unescapeHtml4(extractHeadline(current)));
             current = current.substring(6);
             int nextPos = current.indexOf("<li>");
             if (nextPos == -1) {
